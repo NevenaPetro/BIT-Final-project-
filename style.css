@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+header {
+  padding: 9px 200px;
+  width: 100%;
+  background-color: #343A40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+header > span {
+  color: white;
+  font-size: 14px;
+}
+header > input {
+  height: 27px;
+  width: 140px;
+  font-size: 15px;
+}
+header > input:focus,
+header textarea:focus,
+header select:focus {
+  outline: none;
+}
+
+h5 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.content {
+  margin: 20px 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.content div {
+  width: 30%;
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.content img {
+  width: 100%;
+}
+.content p {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3f9afb;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.aboutMovie {
+  margin: 20px 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: small;
+}
+
+.aboutMovie img {
+  width: 60%;
+}
+
+.aboutMovie ul {
+  margin: 0;
+}
+
+.aboutMovie h3 {
+  margin-top: 20px;
+}
+
+.bottomInfo div {
+  width: 100%;
+}
+.bottomInfo p {
+  margin: 0;
+  text-align: justify;
+}
+
+.backButton {
+  align-self: flex-end;
+  width: 140px;
+  height: 30px;
+  margin: 20px 0 10px 0;
+  padding: 5px 50px;
+  background-color:#343A40;
+  color: white;
+}
+
+footer {
+  padding: 15px 0;
+  background-color: #343A40;
+}
+footer p {
+  color: white;
+  text-align: center;
+  font-size: 10px;
+  margin-bottom: 0;
+}/*# sourceMappingURL=style.css.map */
