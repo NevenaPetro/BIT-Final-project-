@@ -1,16 +1,41 @@
+const mainHeaderShow = document.createElement('h3');
 const container = document.createElement('div');
+mainHeaderShow.textContent = 'Popular shows';
+mainHeaderShow.className = 'mainHeaderShow';
 container.className = 'content';
 const main = document.querySelector('.main');
-const headerShow = document.querySelector('.headerShow');
+const logo = document.querySelector('.logo');
+const searchInput = document.querySelector('.search');
+let allShows = [];
+
+main.append(mainHeaderShow);
 main.append(container);
 
 (function handleRequest() {
   fetch('http://api.tvmaze.com/shows')
     .then((response) => response.json())
-    .then((data) => handleResponse(data));
+    .then((data) => {
+      handleResponse(data);
+      allShows = data;
+    });
 })();
 
+searchInput.addEventListener('input', (event) => {
+  doSearch(event);
+});
+
+function doSearch(e) {
+  searchQuery = e.srcElement.value;
+
+  filteredShows = allShows.filter((el) =>
+    el.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  handleResponse(filteredShows);
+}
+
 function handleResponse(data) {
+  console.log(data);
   let a = data.sort((a, b) => b.rating.average - a.rating.average);
   for (let i = 0; i < 50; i++) {
     const movieDiv = document.createElement('div');
@@ -19,8 +44,9 @@ function handleResponse(data) {
     const imgBig = document.createElement('img');
     const divBottomShowDetails = document.createElement('div');
     divBottomShowDetails.className = 'bottomInfo';
+    movieDiv.className = 'card';
     container.append(movieDiv);
-    parag.textContent = a[i].name + a[i].id;
+    parag.textContent = a[i].name;
     img.src = a[i].image.medium;
     imgBig.src = a[i].image.original;
     divBottomShowDetails.innerHTML = a[i].summary;
@@ -28,10 +54,10 @@ function handleResponse(data) {
     movieDiv.id = a[i].id;
     movieDiv.addEventListener('click', () => {
       container.style.display = 'none';
-      headerShow.textContent = a[i].name;
+      mainHeaderShow.textContent = a[i].name;
       const backButton = document.createElement('div');
       backButton.className = 'backButton';
-      backButton.textContent = '< back';
+      backButton.textContent = '< BACK';
       (function handleRequestShow() {
         fetch(`https://api.tvmaze.com/shows/${movieDiv.id}/seasons`)
           .then((response) => response.json())
@@ -49,22 +75,32 @@ function handleResponse(data) {
         showDivInfo.className = 'aboutMovie';
         sideInfoShow.className = 'sideInfo';
         headerLista.textContent = `Seasons(${data.length})`;
-        headerBottom.textContent = 'Show details';
+        headerBottom.textContent = 'About';
         showImageBig.src = imgBig.src;
         main.append(showDivInfo);
         showDivInfo.append(showImageBig);
         showDivInfo.append(sideInfoShow);
         sideInfoShow.append(headerLista);
         sideInfoShow.append(ulLista);
-        showDivInfo.append(divBottomShowDetails);
-        divBottomShowDetails.prepend(headerBottom);
+        showDivInfo.append(bottomInfoShow);
+        bottomInfoShow.append(headerBottom);
+        bottomInfoShow.append(divBottomShowDetails);
         showDivInfo.append(backButton);
         data.forEach((el) => {
           const liLista = document.createElement('li');
           liLista.textContent = `${el.premiereDate} - ${el.endDate}`;
           ulLista.append(liLista);
         });
-        backButton.addEventListener('click', handleResponse);
+        backButton.addEventListener('click', () => {
+          showDivInfo.style.display = 'none';
+          container.style.display = 'flex';
+          mainHeaderShow.textContent = 'Popular shows';
+        });
+        logo.addEventListener('click', () => {
+          showDivInfo.style.display = 'none';
+          container.style.display = 'flex';
+          mainHeaderShow.textContent = 'Popular shows';
+        });
       }
       (function handleRequestShowCast() {
         fetch(`https://api.tvmaze.com/shows/${movieDiv.id}/cast`)

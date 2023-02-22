@@ -18,10 +18,16 @@ header {
   align-items: center;
   margin-bottom: 15px;
 }
-header > span {
+.logo {
   color: white;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1.5px;
 }
+.logo:hover {
+  cursor:pointer;
+}
+
 header > input {
   height: 27px;
   width: 140px;
@@ -33,7 +39,7 @@ header select:focus {
   outline: none;
 }
 
-h5 {
+.mainHeaderShow {
   text-align: center;
   font-weight: 600;
 }
@@ -47,7 +53,7 @@ h5 {
 .content div {
   width: 30%;
   border: 1px solid lightgrey;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 .content img {
@@ -57,8 +63,14 @@ h5 {
   font-size: 13px;
   font-weight: 700;
   color: #3f9afb;
+  margin-left: 10px;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.content div:hover {
+  transform: scale(1.01);
+  transition: transform .2s;
 }
 
 .aboutMovie {
@@ -91,12 +103,18 @@ h5 {
 
 .backButton {
   align-self: flex-end;
-  width: 140px;
+  width: 150px;
   height: 30px;
   margin: 20px 0 10px 0;
-  padding: 5px 50px;
+  padding: 5px 45px;
   background-color:#343A40;
   color: white;
+}
+
+.backButton:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform .2s;
 }
 
 footer {
